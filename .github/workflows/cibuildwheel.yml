@@ -49,13 +49,16 @@ jobs:
         include:
           - os: ubuntu-20.04
             cibw_archs: "aarch64"
+        include:
+          - os: ubuntu-20.04
+            cibw_archs: "ppc64le"
 
     steps:
       - name: Set up QEMU
-        if: matrix.cibw_archs == 'aarch64'
+        if: matrix.cibw_archs == 'aarch64' || matrix.cibw_archs == 'ppc64le'
         uses: docker/setup-qemu-action@v2
         with:
-          platforms: arm64
+          platforms: arm64, ppc64le
 
       - uses: actions/checkout@v3
         with:
